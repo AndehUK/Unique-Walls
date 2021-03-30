@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -77,17 +77,50 @@
   /**
    * Toggle .header-scrolled class to #header when page is scrolled
    */
+
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
-      if (window.scrollY > 850) {
-        selectHeader.classList.add('header-scrolled')
+      if (window.visualViewport.width < 700) {
+        if (window.scrollY > 550) {
+          selectHeader.classList.add('header-scrolled')
+          console.log("putt")
+          return
+        } else {
+          selectHeader.classList.remove('header-scrolled')
+        }
       } else {
-        selectHeader.classList.remove('header-scrolled')
+        if (window.scrollY > 850) {
+          selectHeader.classList.add('header-scrolled')
+          console.log("put")
+        } else {
+          selectHeader.classList.remove('header-scrolled')
+        }
       }
     }
     window.addEventListener('load', headerScrolled)
     onscroll(document, headerScrolled)
+  }
+
+  let selectDropdown = select('#dropdown')
+  if (selectDropdown) {
+    const dropdownScrolled = () => {
+      if(window.visualViewport.width < 700){
+        if (window.scrollY > 550) {
+          selectDropdown.classList.add('dropdown-scrolled')
+        } else {
+          selectDropdown.classList.remove('dropdown-scrolled')
+        }
+      }else{
+      if (window.scrollY > 850) {
+        selectDropdown.classList.add('dropdown-scrolled')
+      } else {
+        selectDropdown.classList.remove('dropdown-scrolled')
+      }
+    }
+    }
+    window.addEventListener('load', dropdownScrolled)
+    onscroll(document, dropdownScrolled)
   }
 
   /**
@@ -109,7 +142,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -118,7 +151,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -128,7 +161,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -183,9 +216,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
